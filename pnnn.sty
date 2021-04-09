@@ -1,0 +1,63 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{pnnn}[2021/04/08 Style for the notes of plain numpy neural networks]
+
+% math
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsfonts}
+\RequirePackage{amsthm}
+
+\newcommand{\p}{\partial}
+\newcommand{\pa}[1]{\frac{\partial}{\partial#1}}
+\newcommand{\pb}[2]{\frac{\partial#1}{\partial#2}}
+
+% code
+\RequirePackage{xcolor}
+\RequirePackage{listings}
+\RequirePackage{minted}
+\definecolor{codebackground}{RGB}{244,244,244}
+\newcommand{\inlinecode}[1]{ \colorbox{codebackground}{\ttfamily#1} }
+\newenvironment{code}[1]
+{%
+    \VerbatimEnvironment
+    \begin{minted}[framesep=2mm,baselinestretch=1.2,
+        bgcolor=codebackground,fontsize=\footnotesize,
+        breaklines,linenos,autogobble]{#1}}%
+{%
+    \end{minted}%
+}
+
+% margin
+\RequirePackage{geometry}
+\geometry{
+    top=2.54cm,
+    bottom=2.54cm,
+    left=3.18cm,
+    right=3.18cm
+}
+
+% title
+\makeatletter
+\renewcommand\maketitle
+{\begin{center}
+        {\Large\bfseries\@title}\\
+        \vspace{0.5cm}
+        {\large\bfseries\@author}%
+\end{center}
+\par\noindent
+}
+\makeatother
+
+\RequirePackage{titlesec}
+\renewcommand\thesection{\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+\renewcommand\thesubsubsection{}
+\titleformat{\section}[block]
+{\large\bfseries\scshape}{\thesection}{1em}{}
+\titleformat{\subsection}[hang]
+{\bfseries\scshape}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[runin]
+{\normalfont\bfseries}{}{0em}{}
+
+% list
+\RequirePackage{enumitem}
