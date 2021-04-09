@@ -1,0 +1,63 @@
+\documentclass{article}
+
+\usepackage{../../pnnn}
+
+\title{Basics}
+\author{Chang Lu}
+
+\begin{document}
+\maketitle
+
+\section{Activation Functions}
+\paragraph{Sigmoid function}
+\begin{equation}
+    \sigma\left(x\right) = \frac{1}{1 + e^{-x}}.
+\end{equation}
+
+\paragraph{Softmax function}
+\begin{equation}
+    \text{Softmax}\left(x_i\right) = \frac{e^{x_i}}{\sum_{k=1}^{n}{x_k}}.
+\end{equation}
+
+\paragraph{ReLU function}
+\begin{equation}
+    \text{ReLU}\left(x\right) = \begin{cases}
+        0 &~\text{if}~x < 0 \\
+        x &~\text{otherwise}
+    \end{cases}.
+\end{equation}
+
+\section{Evaluation Metrics}
+\subsection{Binary Classification}
+In the binary classification, there are two sample classes: positive and negative. We define the following concepts:
+\begin{itemize}
+    \item True Positive (TP): The number of samples that are correctly identified as positive.
+    \item True Negative (TN): The number of samples that are correctly identified as negative.
+    \item False Positive (FP): The number of samples that are indeed negative but identified as positive.
+    \item False Negative (FN): The number of samples that are indeed positive but identified as negative.
+\end{itemize}
+\paragraph{Accuracy} Accuracy measures how many \textit{samples} are correctly predicted in \textit{all predictions}.
+\begin{equation}
+\text{Accuracy} = \frac{\text{TP + TN}}{\text{TP + TN + FP + FN}}.
+\end{equation}
+\paragraph{Precision} Precision measures how many \textit{positive samples} are correctly predicted in \textit{all positive predictions}.
+\begin{equation}
+    \text{Precision} = \frac{\text{TP}}{\text{TP + FP}}.
+\end{equation}
+\paragraph{Recall} Recall measures how many \textit{positive samples} are correctly predicted in \textit{all positive samples}.
+\begin{equation}
+    \text{Recall} = \frac{\text{TP}}{\text{TP + FN}}.
+\end{equation}
+\paragraph{$\boldsymbol{F}_\mathbf{1}$-Score} $F_1$-score is a combination of Precision and Recall.
+\begin{equation}
+    F_1 = \frac{1}{\text{Precision}^{-1} + \text{Recall}^{-1}} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} = \frac{\text{TP}}{\text{TP} + \frac{1}{2}\left(\text{FP + FN}\right)}.
+\end{equation}
+\paragraph{AUC} Area under the receiver operating characteristic (ROC) curve.
+
+\paragraph{{Remark}}
+\begin{itemize}
+    \item When the classes of samples are imbalanced, accuracy may not be a good metric to evaluation the prediction performance. Considering other four metrics.
+    \item When the cost of identifying positive samples as negative is high, i.e., we want to decrease FP, considering improving Precision. When the cost of identifying negative samples as positive is high, i.e., we want to decrease FN, considering improving Recall.
+\end{itemize}
+
+\end{document}
