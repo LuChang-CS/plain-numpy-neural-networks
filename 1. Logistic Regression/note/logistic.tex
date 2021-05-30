@@ -1,0 +1,41 @@
+\documentclass{article}
+
+\usepackage{../../common/pnnn}
+
+\title{Logistic Regression}
+\author{Chang Lu}
+
+\begin{document}
+\maketitle
+
+\section{Model}
+Let $\mathbf{x} \in \mathbb{R}^{s \times n}$ be the inputs, where $n$ is the number of samples; and $s$ is the dimension of each feature vector. The logistic regression model is:
+\begin{align}
+    \hat{\mathbf{y}} &= \sigma\left(\mathbf{x}^\top\mathbf{w}\right) \\
+    & = \frac{1}{1 + e^{-\mathbf{x^\top w}}}.
+\end{align}
+Here, $\mathbf{w} \in \mathbb{R}^s$ is the weight. For an input sample $\mathbf{x}_i$, let $y_i$ be the ground-truth for $\mathbf{x}_i$. The prediction $0 < \hat{{y}}_i < 1$ is the probability $p\left(y_i = 1 \mid \mathbf{x}_i\right)$.
+
+\section{Objective Function}
+Typically, the logistic regression is a binary classification. Therefore, we use a binary cross-entropy loss as the objective function. For an input sample $\mathbf{x}_i$, the binary cross-entropy loss $L(\mathbf{x}_i, y_i \mid \mathbf{w})$ is:
+\begin{align}
+    L(\mathbf{x}_i, y_i \mid \mathbf{w}) &= -\left(y_i \log\hat{y}_i + \left(1 - y_i\right)\log\left(1 - \hat{y}_i\right)\right) \\
+    &= -\left(y_i \log\left(\frac{1}{1 + e^{-\mathbf{x}^\top_i\mathbf{w}}}\right) + \left(1 - y_i\right)\log\left(\frac{e^{-\mathbf{x}^\top_i\mathbf{w}}}{1 + e^{-\mathbf{x}^\top_i\mathbf{w}}}\right)\right) \\
+    &= \log\left(1 + e^{-\mathbf{x}^\top_i\mathbf{w}}\right) + \mathbf{x}^\top_i\mathbf{w}\left(1 - y_i\right)
+\end{align}
+For all input samples $\mathbf{x}$, the total loss is an average of the losses for all samples:
+\begin{align}
+    L(\mathbf{x}, \mathbf{y} \mid \mathbf{w}) &= \frac{1}{N}\sum_{i = 1}^{n}{L(\mathbf{x}_i, y_i \mid \mathbf{w})} \\
+    &= \frac{1}{N}\sum_{i = 1}^{n}{\left(\log\left(1 + e^{-\mathbf{x}^\top_i\mathbf{w}}\right) + \mathbf{x}^\top_i\mathbf{w}\left(1 - y_i\right)\right)}
+\end{align}
+
+\section{Back-propagation}
+$\mathbf{w}$ is the only variable in $L$. Therefore, we only need to calculate the gradient for $\mathbf{w}$:
+\begin{align}
+    \pb{L}{\mathbf{w}} &= \frac{1}{N}\sum_{i = 1}^{n}{\pa{\mathbf{w}}{\log\left(1 + e^{-\mathbf{x}^\top_i\mathbf{w}}\right)}} + \frac{1}{N}\sum_{i = 1}^{n}{\pa{\mathbf{w}}{\left(\mathbf{x}^\top_i\mathbf{w}\left(1 - \mathbf{y}\right)\right)}} \\
+    &= \frac{1}{N}\sum_{i = 1}^{n}{\frac{-\mathbf{x}_ie^{-\mathbf{x}^\top_i\mathbf{w}}}{1 + e^{-\mathbf{x}_i\mathbf{w}}}} +  \frac{1}{N}\sum_{i = 1}^{n}{\mathbf{x}_i^\top\left(1 - y_i\right)} \\
+    &= \frac{1}{N}\sum_{i = 1}^{n}{-\mathbf{x}_i\left(1 - \hat{y}_i\right)} + \frac{1}{N}\sum_{i = 1}^{n}{\mathbf{x}_i^\top\left(1 - y_i\right)} \\
+    &= \frac{1}{N}\sum_{i = 1}^{n}{\mathbf{x}_i\left(\hat{y}_i - y_i\right)}
+\end{align}
+
+\end{document}
