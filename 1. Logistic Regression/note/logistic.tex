@@ -21,12 +21,12 @@ Typically, the logistic regression is a binary classification. Therefore, we use
 \begin{align}
     L(\mathbf{x}_i, y_i \mid \mathbf{w}) &= -\left(y_i \log\hat{y}_i + \left(1 - y_i\right)\log\left(1 - \hat{y}_i\right)\right) \\
     &= -\left(y_i \log\left(\frac{1}{1 + e^{-\left(\mathbf{x}^\top_i\mathbf{w} + b\right)}}\right) + \left(1 - y_i\right)\log\left(\frac{e^{-\left(\mathbf{x}^\top_i\mathbf{w} + b\right)}}{1 + e^{-\left(\mathbf{x}^\top_i\mathbf{w} + b\right)}}\right)\right) \\
-    &= \log\left(1 + e^{-\left(\mathbf{x}^\top_i\mathbf{w} + b\right)}\right) + \left(\mathbf{x}^\top_i\mathbf{w} + b\right)\left(1 - y_i\right)
+    &= \log\left(1 + e^{-\left(\mathbf{x}^\top_i\mathbf{w} + b\right)}\right) + \left(\mathbf{x}^\top_i\mathbf{w} + b\right)\left(1 - y_i\right).
 \end{align}
 For all input samples $\mathbf{x}$, the total loss is an average of the losses for all samples:
 \begin{align}
     L(\mathbf{x}, \mathbf{y} \mid \mathbf{w}) &= \frac{1}{n}\sum_{i = 1}^{n}{L(\mathbf{x}_i, y_i \mid \mathbf{w})} \\
-    &= \frac{1}{n}\sum_{i = 1}^{n}{\left(\log\left(1 + e^{-\left(\mathbf{x}^\top_i\mathbf{w} + b\right)}\right) + \left(\mathbf{x}^\top_i\mathbf{w} + b\right)\left(1 - y_i\right)\right)}
+    &= \frac{1}{n}\sum_{i = 1}^{n}{\left(\log\left(1 + e^{-\left(\mathbf{x}^\top_i\mathbf{w} + b\right)}\right) + \left(\mathbf{x}^\top_i\mathbf{w} + b\right)\left(1 - y_i\right)\right)}.
 \end{align}
 
 \section{Back-propagation}
@@ -35,8 +35,8 @@ $\mathbf{w}$ and $b$ are the only variable in $L$. Therefore, we only need to ca
     \pb{L}{\mathbf{w}} &= \frac{1}{n}\sum_{i = 1}^{n}{\pa{\mathbf{w}}{\log\left(1 + e^{-\left(\mathbf{x}^\top_i\mathbf{w} + b\right)}\right)}} + \frac{1}{n}\sum_{i = 1}^{n}{\pa{\mathbf{w}}{\left(\mathbf{x}^\top_i\mathbf{w} + b\right)\left(1 - y_i\right)}} \\
     &= \frac{1}{n}\sum_{i = 1}^{n}{\frac{-\mathbf{x}_ie^{-\left(\mathbf{x}^\top_i\mathbf{w} + b\right)}}{1 + e^{-\left(\mathbf{x}^\top_i\mathbf{w} + b\right)}}} + \frac{1}{n}\sum_{i = 1}^{n}{\mathbf{x}_i\left(1 - y_i\right)} \\
     &= \frac{1}{n}\sum_{i = 1}^{n}{-\mathbf{x}_i\left(1 - \hat{y}_i\right)} + \frac{1}{N}\sum_{i = 1}^{n}{\mathbf{x}_i^\top\left(1 - y_i\right)} \\
-    &= \frac{1}{n}\sum_{i = 1}^{n}{\mathbf{x}_i\left(\hat{y}_i - y_i\right)} \\
-    \pb{L}{b} &= \frac{1}{n}\sum_{i = 1}^{n}{\left(\hat{y}_i - y_i\right)}
+    &= \frac{1}{n}\sum_{i = 1}^{n}{\mathbf{x}_i\left(\hat{y}_i - y_i\right)}, \\
+    \pb{L}{b} &= \frac{1}{n}\sum_{i = 1}^{n}{\left(\hat{y}_i - y_i\right)}.
 \end{align}
 
 \end{document}
