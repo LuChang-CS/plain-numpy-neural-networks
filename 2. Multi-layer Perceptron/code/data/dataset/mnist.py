@@ -74,7 +74,7 @@ class MNIST(Dataset):
 
     def _load(self):
         train_x = np.load(os.path.join(self.parsed_path, self.pased_names[0]))
-        train_y = to_onehot(np.load(os.path.join(self.parsed_path, self.pased_names[1])))
+        train_y = np.load(os.path.join(self.parsed_path, self.pased_names[1]))
         test_x = np.load(os.path.join(self.parsed_path, self.pased_names[2]))
-        test_y = to_onehot(np.load(os.path.join(self.parsed_path, self.pased_names[3])))
+        test_y = np.load(os.path.join(self.parsed_path, self.pased_names[3]))
         return (train_x, train_y), (test_x, test_y)
