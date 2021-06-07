@@ -119,7 +119,7 @@ Here, we have already got the gradient for one sample. For all samples, we need 
 \end{align}
 Similarly, the gradient of $\mathbf{b}^{(t)}$ can be calculated as:
 \begin{align}
-    \pb{L}{\mathbf{b}^{(t)}} = \frac{1}{n}\phi(t) \in \mathbb{R}^{1 \times d^{(t)}}. \label{eq:bt}
+    \pb{L}{\mathbf{b}^{(t)}} = \frac{1}{n}\sum_{i = 1}^{n}{\phi(t, i)} \in \mathbb{R}^{1 \times d^{(t)}}. \label{eq:bt}
 \end{align}
 Equations~\eqref{eq:phiT}-\eqref{eq:bt} are the final gradients for MLP. For the dimension of matrix derivative, please refer to \href{https://en.wikipedia.org/wiki/Matrix_calculus}{Matrix Calculus at Wikipedia}.
 
